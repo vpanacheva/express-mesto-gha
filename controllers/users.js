@@ -1,19 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const User = require('../models/user');
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
 const ERROR_SERVER_ERROR = 500;
 
-/** при GET-запросе на URL /users  */
 const getUsers = (req, res) => {
   User.find({})
     .then((users) => res.send({ data: users }))
     .catch(() => res.status(ERROR_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' }));
 };
 
-/** GET-pfghjc /users/:id */
 const getUserById = (req, res) => {
-  /** доступк параметрам */
   const { id } = req.params;
   User
     .findById(id)
@@ -33,7 +31,6 @@ const getUserById = (req, res) => {
     });
 };
 
-/** POST-запрос /users  */
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   User
@@ -48,9 +45,7 @@ const createUser = (req, res) => {
     });
 };
 
-/** обновление данных пользователя */
 const updateUser = (req, res) => {
-  // eslint-disable-next-line no-underscore-dangle
   const userId = req.user._id;
   const { name, about } = req.body;
   User
@@ -81,9 +76,7 @@ const updateUser = (req, res) => {
     });
 };
 
-/** PATCH-запрос /users/me/avatar */
 const updateUserAvatar = (req, res) => {
-  // eslint-disable-next-line no-underscore-dangle
   const userId = req.user._id;
   const { avatar } = req.body;
   User

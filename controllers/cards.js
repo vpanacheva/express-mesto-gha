@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Card = require('../models/card');
 
 const ERROR_BAD_REQUEST = 400;
@@ -25,8 +26,6 @@ const createCard = (req, res) => {
     owner,
   })
     .then((card) => {
-      // eslint-disable-next-line max-len
-      /** При успешном создании карточки нужно возвращать 201 статус ответа, этот статус ответа означает, что сервер успешно обработал запрос и создал новый ресурс */
       res.status(201).send(card);
     })
     .catch((err) => {

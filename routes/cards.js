@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const router = require('express').Router();
 
 const {
   createCard, getCards, deleteCard, likeCard, dislikeCard,
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require('../controllers/cards');
 
 router.get('/', getCards);

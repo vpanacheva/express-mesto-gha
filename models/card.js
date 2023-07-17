@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema(
@@ -31,6 +32,4 @@ const cardSchema = new mongoose.Schema(
   },
 );
 
-// const Card = mongoose.model('card', cardSchema);
-// module.exports = Card;
 module.exports = mongoose.model('card', cardSchema);
