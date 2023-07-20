@@ -47,19 +47,12 @@ const deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.cardId)
 
   .then((card) => {
-
     if (!card) {
-
-      res
-
+      return res
         .status(ERROR_NOT_FOUND)
-
         .send({ message: 'Карточка с указанным id не найдена.' });
-
     }
-
     res.send({ card });
-
   })
     .catch((err) => {
       if (err.name === 'CastError') {
