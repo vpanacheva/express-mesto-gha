@@ -1,8 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -24,4 +22,4 @@ const userSchema = new mongoose.Schema(
   { versionKey: false },
 );
 
-module.exports = mongoose.model('user', userSchema);
+export default model('user', userSchema);

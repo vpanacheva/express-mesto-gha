@@ -1,12 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const router = require('express').Router();
+import {Router as expressRouter} from "express";
+const router = expressRouter();
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const usersRouter = require('./users');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const cardsRouter = require('./cards');
+import usersRouter from './users';
+import cardsRouter from './cards';
 
 router.use('/cards', cardsRouter);
 router.use('/users', usersRouter);
 
-module.exports = router;
+export default router;

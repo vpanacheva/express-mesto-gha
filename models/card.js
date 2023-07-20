@@ -1,7 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const mongoose = require('mongoose');
 
-const cardSchema = new mongoose.Schema(
+import { Schema, model } from 'mongoose';
+
+const cardSchema = new Schema(
   {
     name: {
       type: String,
@@ -14,13 +14,13 @@ const cardSchema = new mongoose.Schema(
       required: [true, 'Поле "link" должно быть заполнено'],
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'user',
       required: [true, 'Поле "owner" должно быть заполнено'],
     },
     likes: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'user',
         default: [],
       },
@@ -32,4 +32,4 @@ const cardSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model('card', cardSchema);
+export default model('card', cardSchema);

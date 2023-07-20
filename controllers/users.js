@@ -1,20 +1,19 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const User = require('../models/user');
+
+import { find, findById, create, findByIdAndUpdate } from '../models/user';
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
 const ERROR_SERVER_ERROR = 500;
 
 const getUsers = (req, res) => {
-  User.find({})
+  find({})
     .then((users) => res.send({ data: users }))
     .catch(() => res.status(ERROR_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' }));
 };
 
 const getUserById = (req, res) => {
   const { id } = req.params;
-  User
-    .findById(id)
+  findById(id)
     .then((user) => {
       if (!user) {
         res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь не найден' });
@@ -33,8 +32,7 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
-  User
-    .create({ name, about, avatar })
+  create({ name, about, avatar })
     .then((user) => res.status(201).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -48,8 +46,7 @@ const createUser = (req, res) => {
 const updateUser = (req, res) => {
   const userId = req.user._id;
   const { name, about } = req.body;
-  User
-    .findByIdAndUpdate(
+  findByIdAndUpdate(
       userId,
       { name, about },
       { new: true, runValidators: true },
@@ -79,8 +76,7 @@ const updateUser = (req, res) => {
 const updateUserAvatar = (req, res) => {
   const userId = req.user._id;
   const { avatar } = req.body;
-  User
-    .findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
+  findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         res
@@ -105,7 +101,7 @@ const updateUserAvatar = (req, res) => {
     });
 };
 
-module.exports = {
+export default {
   getUsers,
   getUserById,
   createUser,

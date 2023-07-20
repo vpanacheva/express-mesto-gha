@@ -1,12 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Card = require('../models/card');
+
+import { find, create, findByIdAndRemove, findByIdAndUpdate } from '../models/card';
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
 const ERROR_SERVER_ERROR = 500;
 
 const getCards = (req, res) => {
-  Card.find({})
+  find({})
     .then((cards) => {
       res.send(cards);
     })
@@ -20,7 +20,7 @@ const getCards = (req, res) => {
 const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
-  Card.create({
+  create({
     name,
     link,
     owner,
@@ -44,12 +44,10 @@ const createCard = (req, res) => {
 };
 
 const deleteCard = (req, res) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  findByIdAndRemove(req.params.cardId)
     .then((card) => {
       if (!card) {
-        res
-          .status(ERROR_NOT_FOUND)
-          .send({ message: 'Карточка с указанным id не найдена.' });
+        return findByIdAndRemove(req.params.cardId);
       }
       res.send({ card });
     })
@@ -69,7 +67,7 @@ const deleteCard = (req, res) => {
 };
 
 const likeCard = (req, res) => {
-  Card.findByIdAndUpdate(
+  findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
@@ -99,7 +97,7 @@ const likeCard = (req, res) => {
 };
 
 const dislikeCard = (req, res) => {
-  Card.findByIdAndUpdate(
+  findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } },
     { new: true },
@@ -126,7 +124,7 @@ const dislikeCard = (req, res) => {
     });
 };
 
-module.exports = {
+export default {
   getCards,
   createCard,
   deleteCard,

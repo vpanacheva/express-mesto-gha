@@ -1,10 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const router = require('express').Router();
+import {Router as expressRouter} from "express";
+const router = expressRouter();
 
-const {
-  createUser, getUsers, getUserById, updateUser, updateUserAvatar,
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-} = require('../controllers/users');
+import {
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  updateUserAvatar,
+} from '../controllers/users';
 
 router.post('/', createUser);
 router.get('/', getUsers);
