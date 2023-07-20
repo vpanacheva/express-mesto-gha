@@ -45,12 +45,22 @@ const createCard = (req, res) => {
 
 const deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.cardId)
-    .then((card) => {
-      if (!card) {
-        return Card.findByIdAndRemove(req.params.cardId);
-      }
-      res.send({ card });
-    })
+
+  .then((card) => {
+
+    if (!card) {
+
+      res
+
+        .status(ERROR_NOT_FOUND)
+
+        .send({ message: 'Карточка с указанным id не найдена.' });
+
+    }
+
+    res.send({ card });
+
+  })
     .catch((err) => {
       if (err.name === 'CastError') {
         res
