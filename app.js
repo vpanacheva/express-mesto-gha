@@ -4,7 +4,7 @@ import helmet from 'helmet';
 
 //const { PORT = 3000 } = process.env;
 const app = express();
-import router from './routes/index';
+import router from './routes/index.js';
 const ERROR_NOT_FOUND = 404;
 
 

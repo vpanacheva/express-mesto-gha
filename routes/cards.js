@@ -7,7 +7,7 @@ import {
   getCards,
   deleteCard,
   likeCard,
-  dislikeCard } from '../controllers/cards';
+  dislikeCard } from '../controllers/cards.js';
 
 router.get('/', getCards);
 router.post('/', createCard);

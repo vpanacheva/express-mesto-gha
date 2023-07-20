@@ -1,12 +1,12 @@
 
-import { find, create, findByIdAndRemove, findByIdAndUpdate } from '../models/card';
+import Card from '../models/card.js';
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
 const ERROR_SERVER_ERROR = 500;
 
 const getCards = (req, res) => {
-  find({})
+  Card.find({})
     .then((cards) => {
       res.send(cards);
     })
@@ -20,7 +20,7 @@ const getCards = (req, res) => {
 const createCard = (req, res) => {
   const { name, link } = req.body;
   const owner = req.user._id;
-  create({
+  Card.create({
     name,
     link,
     owner,
@@ -44,10 +44,10 @@ const createCard = (req, res) => {
 };
 
 const deleteCard = (req, res) => {
-  findByIdAndRemove(req.params.cardId)
+  Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
       if (!card) {
-        return findByIdAndRemove(req.params.cardId);
+        return Card.findByIdAndRemove(req.params.cardId);
       }
       res.send({ card });
     })
@@ -67,7 +67,7 @@ const deleteCard = (req, res) => {
 };
 
 const likeCard = (req, res) => {
-  findByIdAndUpdate(
+  Card.findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
@@ -97,7 +97,7 @@ const likeCard = (req, res) => {
 };
 
 const dislikeCard = (req, res) => {
-  findByIdAndUpdate(
+  Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } },
     { new: true },
@@ -124,7 +124,7 @@ const dislikeCard = (req, res) => {
     });
 };
 
-export default {
+export {
   getCards,
   createCard,
   deleteCard,
