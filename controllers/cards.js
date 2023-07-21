@@ -1,5 +1,4 @@
-
-import Card from '../models/card.js';
+const Card = require('../models/card');
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
@@ -127,7 +126,7 @@ const dislikeCard = (req, res) => {
     });
 };
 
-export {
+module.exports = {
   getCards,
   createCard,
   deleteCard,

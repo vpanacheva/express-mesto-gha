@@ -1,13 +1,7 @@
 
-import {Router as expressRouter} from "express";
-const router = expressRouter();
+const router = require('express').Router();
 
-import {
-  createCard,
-  getCards,
-  deleteCard,
-  likeCard,
-  dislikeCard } from '../controllers/cards.js';
+import { createCard, getCards, deleteCard, likeCard, dislikeCard } from '../controllers/cards';
 
 router.get('/', getCards);
 router.post('/', createCard);

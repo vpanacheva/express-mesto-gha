@@ -1,7 +1,6 @@
+const mongoose = require('mongoose');
 
-import { Schema, model } from 'mongoose';
-
-const cardSchema = new Schema(
+const cardSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -14,13 +13,13 @@ const cardSchema = new Schema(
       required: [true, 'Поле "link" должно быть заполнено'],
     },
     owner: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
       required: [true, 'Поле "owner" должно быть заполнено'],
     },
     likes: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         default: [],
       },
@@ -32,4 +31,4 @@ const cardSchema = new Schema(
   },
 );
 
-export default model('card', cardSchema);
+module.exports = mongoose.model('card', cardSchema);

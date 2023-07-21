@@ -1,5 +1,4 @@
-
-import User from '../models/user.js';
+const User = require('../models/user');
 
 const ERROR_BAD_REQUEST = 400;
 const ERROR_NOT_FOUND = 404;
@@ -105,7 +104,7 @@ const updateUserAvatar = (req, res) => {
     });
 };
 
-export {
+module.exports = {
   getUsers,
   getUserById,
   createUser,

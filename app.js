@@ -1,13 +1,11 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import helmet from 'helmet';
+const express = require('express');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 //const { PORT = 3000 } = process.env;
 const app = express();
-import router from './routes/index.js';
+const router = require('./routes/index');
 const ERROR_NOT_FOUND = 404;
-
-
 /** подключаем к бд */
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
