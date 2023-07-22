@@ -5,7 +5,6 @@ const BadRequestError = require('../errors/BadRequestError');
 
 function getCards(_, res, next) {
   Card.find({})
-    .populate(['owner', 'likes'])
     .then((cards) => res.send({ data: cards }))
     .catch(next);
 }
@@ -50,10 +49,6 @@ function deleteCard(req, res, next) {
       return Card.findByIdAndDelete(cardId);
     })
     .then((deletedCard) => {
-      if (!deletedCard) {
-        throw new NotFoundError('Карточка уже была удалена');
-      }
-
       res.send({ data: deletedCard });
     })
     .catch(next);
